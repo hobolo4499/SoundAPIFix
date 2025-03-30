@@ -24,4 +24,9 @@ static class SoundPatch {
 			)
 			.InstructionEnumeration();
 	}
+
+	[HarmonyPrefix, HarmonyPatch(nameof(Sound.PlayLoop))]
+	static void ResetAudioInfoFetched(Sound __instance) {
+		if(!__instance.Source.clip) __instance.AudioInfoFetched = false;
+	}
 }
