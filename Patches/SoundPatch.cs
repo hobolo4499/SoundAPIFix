@@ -25,8 +25,11 @@ static class SoundPatch {
 			.InstructionEnumeration();
 	}
 
+	// The vanilla PlayLoop returns before touching Source when the sound has no clips, and some loops (the Slow
+	// Walker's standaloneLoopSound) have neither clips nor a Source. This prefix runs before that check, so it
+	// must not assume a Source either (it threw a NullReferenceException every frame).
 	[HarmonyPrefix, HarmonyPatch(nameof(Sound.PlayLoop))]
 	static void ResetAudioInfoFetched(Sound __instance) {
-		if(!__instance.Source.clip) __instance.AudioInfoFetched = false;
+		if(__instance.Source && !__instance.Source.clip) __instance.AudioInfoFetched = false;
 	}
 }
