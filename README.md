@@ -3,7 +3,7 @@ R.E.P.O. bindings for [SoundAPI](https://soundapi.loaforc.me), with one fix.
 
 The original [loaforcsSoundAPI.REPO](https://github.com/loaforcsSoundAPI/loaforcsSoundAPI.REPO) by **loaforc** fixes an
 oversight in the vanilla game that would cause SoundAPI to seemingly replace sounds with silence. Version 1.0.1 of it
-throws a `NullReferenceException` every frame while a Slow Walker attacks, which floods the log. This fork fixes that.
+throws a `NullReferenceException` every frame while a Slow Walker is in the level (walking around is enough), which floods the log. This fork fixes that.
 
 ### What changed
 - `Patches/SoundPatch.cs`: the `PlayLoop` prefix no longer assumes the sound has an `AudioSource`. The game's own
